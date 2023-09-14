@@ -65,6 +65,7 @@ public class Tp1PersistenciaApplication {
 
 
 
+
 				Pedido pedido = Pedido.builder()
 					.estado("En preparacion")
 					.fecha(new Date())
@@ -89,29 +90,31 @@ public class Tp1PersistenciaApplication {
 
 				pedido.setFactura(factura);
 
-				clienteRepositorio.save(cliente);
 
 
 
+			Producto producto = Producto.builder()
+					.tipo("Comestible")
+					.tiempoEstimadoCocina(30)
+					.denominacion("desconocida")
+					.precioVenta(1500.0)
+					.precioCompra(1000.0)
+					.stockActual(30)
+					.stockMinimo(10)
+					.unidadMedida("kg")
+					.receta("Casera")
+					.build();
 
-				Producto producto = Producto.builder()
-						.tipo("Comestible")
-						.tiempoEstimadoCocina(30)
-						.denominacion("desconocida")
-						.precioVenta(1500.0)
-						.precioCompra(1000.0)
-						.stockActual(30)
-						.stockMinimo(10)
-						.unidadMedida("kg")
-						.receta("Casera")
-						.build();
+			detallePedido.setProducto(producto);
 
+			Rubro rubro = Rubro.builder()
+					.denominacion("Chocolate")
+					.build();
 
-				Rubro rubro = Rubro.builder()
-						.denominacion("Chocolate")
-						.build();
+			rubro.agregarProducto(producto);
 
-				rubro.agregarProducto(producto);
+			clienteRepositorio.save(cliente);
+			rubroRepositorio.save(rubro);
 
 
 
